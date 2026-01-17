@@ -1,0 +1,143 @@
+/* ===== GLOBAL & TYPOGRAPHY ===== */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Share+Tech+Mono&display=swap');
+
+body {
+    margin: 0;
+    background: #050505;
+    background-image: radial-gradient(circle, #1a0a0a 0%, #050505 100%);
+    font-family: 'Share Tech Mono', monospace;
+    overflow: hidden;
+    height: 100vh;
+    color: #f2f2f2;
+}
+
+.content {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.6); /* Mocniejsze przyciemnienie dla ostrości licznika */
+    backdrop-filter: blur(2px); /* Silniejszy blur dla głębi */
+}
+
+h1 {
+    font-family: 'Orbitron', sans-serif;
+    margin-bottom: 50px;
+    letter-spacing: 12px;
+    text-transform: uppercase;
+    color: #ff4d4d;
+    font-size: 85px;
+    text-shadow: 0 0 20px #ff1a1a, 0 0 40px rgba(255, 26, 26, 0.3);
+}
+
+#countdown {
+    font-size: 75px;
+    margin-bottom: 30px;
+    color: #00ffcc;
+    text-shadow: 0 0 15px #00ffcc, 0 0 30px rgba(0, 255, 204, 0.5);
+    font-weight: bold;
+}
+
+#subtitle {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 56px;
+    margin-bottom: 10px;
+    letter-spacing: 5px;
+    text-shadow: 0 0 8px #ff4d4d;
+    color: #ff1a1a;
+}
+
+footer {
+    font-size: 31px;
+    letter-spacing: 4px;
+    opacity: 0.8;
+    color: #ff4d4d;
+    text-shadow: 0 0 12px #ff1a1a;
+}
+
+/* ===== KALENDARZ W TLE (OSTRZEJSZY) ===== */
+.calendar-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 12px; /* Mniejsze gapy = ostrzejszy wygląd */
+    padding: 20px;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    opacity: 0.35; /* Większa widoczność dla klimatu */
+    z-index: 1;
+}
+
+.day {
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Cieńsze, techniczne obramowanie */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 48px;
+    color: #444;
+    position: relative;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+/* ===== PRZESZŁE DNI (CZERWONY PULSUJĄCY ALARM) ===== */
+.past {
+    color: #600 !important;
+    border-color: #500 !important;
+    /* Pulsowanie całej kratki na czerwono */
+    animation: pastDanger 2.5s infinite alternate ease-in-out;
+}
+
+.past::before, .past::after {
+    content: "";
+    position: absolute;
+    width: 115%;
+    height: 2px; /* Cieńszy, ostrzejszy X */
+    background: #ff1a1a;
+    box-shadow: 0 0 10px #ff1a1a;
+    z-index: 2;
+}
+.past::before { transform: rotate(45deg); }
+.past::after { transform: rotate(-45deg); }
+
+@keyframes pastDanger {
+    from { 
+        background: rgba(255, 0, 0, 0.01);
+        box-shadow: inset 0 0 5px rgba(255, 0, 0, 0.1);
+    }
+    to { 
+        background: rgba(255, 0, 0, 0.1);
+        box-shadow: inset 0 0 20px rgba(255, 0, 0, 0.4);
+    }
+}
+
+/* ===== DZISIEJSZY DZIEŃ (CYJANOWY NEON) ===== */
+.today {
+    border: 3px solid #00ffcc !important;
+    color: #00ffcc !important;
+    box-shadow: 0 0 20px #00ffcc, inset 0 0 10px #00ffcc;
+    z-index: 5;
+    background: rgba(0, 255, 204, 0.15) !important;
+    animation: superPulse 1.2s infinite alternate ease-in-out !important;
+}
+
+@keyframes superPulse {
+    from { 
+        transform: scale(1); 
+        box-shadow: 0 0 15px #00ffcc, inset 0 0 5px #00ffcc;
+        text-shadow: 0 0 5px #00ffcc;
+        filter: brightness(0.8);
+    }
+    to { 
+        transform: scale(1.06); 
+        box-shadow: 0 0 35px #00ffcc, inset 0 0 20px #00ffcc;
+        text-shadow: 0 0 20px #00ffcc;
+        filter: brightness(1.5); /* Rozbłysk całego pola */
+    }
+}
